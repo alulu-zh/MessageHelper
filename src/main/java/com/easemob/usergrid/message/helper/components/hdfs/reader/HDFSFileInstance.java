@@ -8,9 +8,11 @@ import org.apache.commons.lang.StringUtils;
  */
 public class HDFSFileInstance extends FileInstance {
     private static final String SPLIT = "_";
+
     public HDFSFileInstance(String path) {
         super(path);
     }
+
     @Override
     public String getOrg() {
         if (StringUtils.isNotBlank(org)) {
@@ -50,6 +52,5 @@ public class HDFSFileInstance extends FileInstance {
         }
         return 0L;
     }
-
 
 }

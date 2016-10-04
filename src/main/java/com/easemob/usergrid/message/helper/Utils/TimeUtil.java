@@ -9,7 +9,7 @@ public class TimeUtil {
     public static void sleep(long millis) {
         try {
             Thread.currentThread().sleep(millis);
-        } catch (InterruptedException e) {
+        } catch (Exception e) {
             throw new CommonRuntimeException(e);
         }
     }

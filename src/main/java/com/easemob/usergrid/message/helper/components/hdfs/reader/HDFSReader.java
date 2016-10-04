@@ -3,7 +3,7 @@ package com.easemob.usergrid.message.helper.components.hdfs.reader;
 import com.easemob.usergrid.message.helper.Utils.CommonConstant;
 import com.easemob.usergrid.message.helper.components.common.CommonReader;
 import com.easemob.usergrid.message.helper.components.common.FileInstance;
-import com.easemob.usergrid.message.helper.components.hdfs.config.HDFSConfig;
+import com.easemob.usergrid.message.helper.components.hdfs.HDFSProperties;
 import com.easemob.usergrid.message.helper.exceptions.NullFileSystemException;
 import com.easemob.usergrid.message.helper.exceptions.NullPathException;
 import com.easemob.usergrid.message.helper.exceptions.ReadHDFSException;
@@ -25,15 +25,16 @@ import java.util.Objects;
  */
 public class HDFSReader implements CommonReader {
     public static final String HDFS_CONNECTION = "HDFS.CONNECTION";
+    public static final String HDFS_CONNECTION_POOL_MANAGER = "HDFS.CONNECTION.POOL.MANAGER";
     private static final Logger logger = LoggerFactory.getLogger(HDFSReader.class);
     private static final Logger list_logger = LoggerFactory.getLogger(CommonConstant.FAILED_LIST_FILES_LOGGER);
     private static final Logger read_logger = LoggerFactory.getLogger(CommonConstant.FAILED_READ_FILE_LOGGER);
     private static final int DEFAULT_TIMEOUT = 5;
-    private HDFSConfig hdfsConfig;
+    private HDFSProperties hdfsProperties;
     private HDFSConnectionPoolManager poolManager;
 
-    public HDFSReader(HDFSConfig hdfsConfig) {
-        this.hdfsConfig = hdfsConfig;
+    public HDFSReader(HDFSProperties hdfsProperties) {
+        this.hdfsProperties = hdfsProperties;
         init();
     }
 
@@ -95,7 +96,7 @@ public class HDFSReader implements CommonReader {
     }
 
     private void init() {
-        poolManager = new HDFSConnectionPoolManager(hdfsConfig);
+        poolManager = new HDFSConnectionPoolManager(hdfsProperties);
     }
 
     private FileInstance createFileInstance(FileSystem fs, FileStatus status) {
@@ -107,6 +108,7 @@ public class HDFSReader implements CommonReader {
         instance.setName(path.getName());
         Map<String, Object> properties = new HashMap<>();
         properties.put(HDFSReader.HDFS_CONNECTION, fs);
+        properties.put(HDFSReader.HDFS_CONNECTION_POOL_MANAGER, poolManager);
         instance.setProperties(properties);
         return instance;
     }

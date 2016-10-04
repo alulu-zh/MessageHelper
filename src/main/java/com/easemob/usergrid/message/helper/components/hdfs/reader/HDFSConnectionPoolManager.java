@@ -1,7 +1,7 @@
 package com.easemob.usergrid.message.helper.components.hdfs.reader;
 
 import com.easemob.usergrid.message.helper.Utils.TimeUtil;
-import com.easemob.usergrid.message.helper.components.hdfs.config.HDFSConfig;
+import com.easemob.usergrid.message.helper.components.hdfs.HDFSProperties;
 import org.apache.commons.lang.StringUtils;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.FileSystem;
@@ -20,27 +20,28 @@ import java.util.function.Predicate;
  */
 public class HDFSConnectionPoolManager {
     private static final Logger logger = LoggerFactory.getLogger(HDFSConnectionPoolManager.class);
-    private HDFSConfig hdfsConfig;
+    private HDFSProperties hdfsProperties;
     private List<FileSystemWrapper> pool = new LinkedList<>();
     private static final long DEFAULT_INTERVAL_TIME = 1 * 1000L;
-    public HDFSConnectionPoolManager(HDFSConfig hdfsConfig) {
-        this.hdfsConfig = hdfsConfig;
+
+    public HDFSConnectionPoolManager(HDFSProperties hdfsProperties) {
+        this.hdfsProperties = hdfsProperties;
         init();
     }
 
     private void init() {
-        if (Objects.isNull(hdfsConfig)) {
-            logger.error("init | HDFSConfig is null");
+        if (Objects.isNull(hdfsProperties)) {
+            logger.error("init | HDFSProperties is null");
             return;
         }
-        String baseUri = hdfsConfig.getBaseUri();
+        String baseUri = hdfsProperties.getBaseUri();
         if (StringUtils.isBlank(baseUri)) {
             logger.error("init | HDFS baseUri is null");
             return;
         }
         int poolSize = 1;
-        if (hdfsConfig.getMaxConnection() > 0) {
-            poolSize = hdfsConfig.getMaxConnection();
+        if (hdfsProperties.getMaxConnection() > 0) {
+            poolSize = hdfsProperties.getMaxConnection();
         }
         for (int i = 0; i < poolSize; i++) {
             try {
@@ -113,6 +114,7 @@ public class HDFSConnectionPoolManager {
             }
         }
     }
+
     private static class FileSystemWrapper {
         private static final int UNUSED = 0;
         private static final int USED = 1;

@@ -1,14 +1,46 @@
-# Log config
-logging:
-  path: target/log
-    level:
-      root: WARN
-      org.springframework.web: DEBUG
-      org.hibernate: ERROR
-# HDFS conifg
 service:
   config:
-    HDFS:
-      baseUri: 'hdfs://10.26.68.156:8020'
-      folder: '/tmp/rsRDD0001'
-      maxConnection: 20
+    storageMode: oss
+# HDFS conifg
+HDFS:
+  baseUri: 'hdfs://10.26.68.156:8020'
+  folder: '/tmp/rsRDD0001'
+  maxConnection: 20
+
+cache:
+  appconfig:
+    master:
+      node1: tcp://127.0.0.1:6379
+      node2: tcp://127.0.0.1:6379
+    slave:
+      node1: tcp://127.0.0.1:6379
+      node2: tcp://127.0.0.1:6379
+
+redis:
+  pool:
+    maxTotal: 100
+
+storage:
+  oss:
+    credential:
+      accessKeyId: 'N5EV6wm7IHaKmP41'
+      accessKeySecret: '4NPOO3tPKEdoyqgiCV1PpFdxpAXfhr'
+    region: 'http://oss-cn-hangzhou.aliyuncs.com'
+    bucket: 'hz-chatmessage-test1'
+    properties:
+      clientMaxConn: 100
+      clientConnTimeOut: 5
+      clientMaxErrRetry: 3
+      clientSocketTimeOut: 60
+  oss:
+    credential:
+      accessKeyId: 'AKIAJSQFOHG5YTC7GFOA'
+      accessKeySecret: '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'
+    region: 'us-west-1'
+    bucket: 'zhangqq-s3-west-1-test'
+    properties:
+      clientMaxConn: 1000
+      clientConnTimeOut: 5000
+      clientMaxErrRetry: 3
+      clientSocketTimeOut: 60000
+
