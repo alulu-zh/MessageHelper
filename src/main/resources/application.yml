@@ -1,0 +1,14 @@
+# Log config
+logging:
+  path: target/log
+    level:
+      root: WARN
+      org.springframework.web: DEBUG
+      org.hibernate: ERROR
+# HDFS conifg
+service:
+  config:
+    HDFS:
+      baseUri: 'hdfs://10.26.68.156:8020'
+      folder: '/tmp/rsRDD0001'
+      maxConnection: 20

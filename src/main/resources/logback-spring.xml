@@ -1,0 +1,119 @@
+<configuration scan="true" scanPeriod="300 seconds">
+    <property name="ROOT_LOG_DIR" value="target/root_log"/>
+    <property name="ROOT_LOG_NAME" value="MessageHelper"/>
+    <property name="ROOT_ERROR_LOG_DIR" value="target/root_error_log"/>
+    <property name="ROOT_ERROR_LOG_NAME" value="MessageHelper_error"/>
+    <property name="FAILED_LIST_FILES_LOG_DIR" value="target/failed_list_files_log"/>
+    <property name="FAILED_LIST_FILES_LOG_NAME" value="failed_list_files"/>
+    <property name="FAILED_READ_FILE_LOG_DIR" value="target/failed_read_file_log"/>
+    <property name="FAILED_READ_FILE_LOG_NAME" value="failed_read_file"/>
+    <property name="FAILED_UPLOAD_FILE_LOG_DIR" value="target/failed_upload_file_log"/>
+    <property name="FAILED_UPLOAD_FILE_LOG_NAME" value="failed_upload_file"/>
+
+    <appender name="root_appender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <Encoding>UTF-8</Encoding>
+        <File>${ROOT_LOG_DIR}/${ROOT_LOG_NAME}.log</File>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${ROOT_LOG_DIR}/${ROOT_LOG_NAME}.%d{yyyy-MM-dd-HH}.log.gz</fileNamePattern>
+            <!-- history time unit : hour -->
+            <maxHistory>240</maxHistory>
+        </rollingPolicy>
+        <!-- level filter chain for info warn -->
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>INFO</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>NEUTRAL</onMismatch>
+        </filter>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>WARN</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+        <encoder>
+            <pattern>%d [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+    <appender name="error_appender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <Encoding>UTF-8</Encoding>
+        <File>${ROOT_ERROR_LOG_DIR}/${ROOT_ERROR_LOG_NAME}.log</File>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${ROOT_ERROR_LOG_DIR}/${ROOT_ERROR_LOG_NAME}.%d{yyyy-MM-dd-HH}.log.gz</fileNamePattern>
+            <!-- history time unit : hour -->
+            <maxHistory>240</maxHistory>
+        </rollingPolicy>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>ERROR</level>
+        </filter>
+        <encoder>
+            <pattern>%d [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+    <appender name="failed_list_files_appender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <Encoding>UTF-8</Encoding>
+        <File>${FAILED_LIST_FILES_LOG_DIR}/${FAILED_LIST_FILES_LOG_NAME}.log</File>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${FAILED_LIST_FILES_LOG_DIR}/${FAILED_LIST_FILES_LOG_NAME}.%d{yyyy-MM-dd-HH}.log.gz</fileNamePattern>
+            <!-- history time unit : hour -->
+            <maxHistory>240</maxHistory>
+        </rollingPolicy>
+        <!-- level filter chain for info warn -->
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>ERROR</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>NEUTRAL</onMismatch>
+        </filter>
+        <encoder>
+            <pattern>%d [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+    <appender name="failed_read_file_appender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <Encoding>UTF-8</Encoding>
+        <File>${FAILED_READ_FILE_LOG_DIR}/${FAILED_READ_FILE_LOG_NAME}.log</File>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${FAILED_READ_FILE_LOG_DIR}/${FAILED_READ_FILE_LOG_NAME}.%d{yyyy-MM-dd-HH}.log.gz</fileNamePattern>
+            <!-- history time unit : hour -->
+            <maxHistory>240</maxHistory>
+        </rollingPolicy>
+        <!-- level filter chain for info warn -->
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>ERROR</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>NEUTRAL</onMismatch>
+        </filter>
+        <encoder>
+            <pattern>%d [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+    <appender name="failed_upload_file_appender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <Encoding>UTF-8</Encoding>
+        <File>${FAILED_UPLOAD_FILE_LOG_DIR}/${FAILED_UPLOAD_FILE_LOG_NAME}.log</File>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${FAILED_UPLOAD_FILE_LOG_DIR}/${FAILED_UPLOAD_FILE_LOG_NAME}.%d{yyyy-MM-dd-HH}.log.gz</fileNamePattern>
+            <!-- history time unit : hour -->
+            <maxHistory>240</maxHistory>
+        </rollingPolicy>
+        <!-- level filter chain for info warn -->
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>ERROR</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>NEUTRAL</onMismatch>
+        </filter>
+        <encoder>
+            <pattern>%d [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+    <!-- root log config -->
+    <root level="INFO">
+        <appender-ref ref="root_appender"/>
+        <appender-ref ref="error_appender"/>
+    </root>
+    <logger name="failed_list_files" level="ERROR">
+        <appender-ref ref="failed_list_files_appender"/>
+    </logger>
+    <logger name="failed_read_file" level="ERROR">
+        <appender-ref ref="failed_read_file_appender"/>
+    </logger>
+    <logger name="failed_upload_file" level="ERROR">
+        <appender-ref ref="failed_upload_file_appender"/>
+    </logger>
+</configuration>
