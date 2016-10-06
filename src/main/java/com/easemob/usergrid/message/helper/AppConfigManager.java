@@ -1,7 +1,8 @@
-package com.easemob.usergrid.message.helper.components.appconfig;
+package com.easemob.usergrid.message.helper;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
 import redis.clients.jedis.ShardedJedis;
 import redis.clients.jedis.ShardedJedisPool;
 
@@ -11,7 +12,8 @@ import java.util.Map;
 /**
  * Created by zhouhu on 4/10/2016.
  */
-public class AppConfigManagerImpl implements AppConfigManager {
+@Component
+public class AppConfigManager {
     private static final Map<Long, String> map = new HashMap<>();
     private static final String APPCONIFG_PREFIX = "appconfig:usergrid";
     private static final String APPCONIFG_SUFFIX = "properties";
@@ -26,7 +28,6 @@ public class AppConfigManagerImpl implements AppConfigManager {
     @Qualifier("salveConfigJedisPool")
     private ShardedJedisPool salveConfigJedisPool;
 
-    @Override
     public String getExperiedTime(String appkey) {
         try (ShardedJedis jedis = salveConfigJedisPool.getResource()) {
             String key = getKey(appkey);

@@ -106,6 +106,9 @@ public class HDFSReader implements CommonReader {
         Path path = status.getPath();
         FileInstance instance = new HDFSFileInstance(path.toString());
         instance.setName(path.getName());
+        instance.setOrg(instance.getOrg());
+        instance.setApp(instance.getApp());
+        instance.setTimestamp(instance.getTimestamp());
         Map<String, Object> properties = new HashMap<>();
         properties.put(HDFSReader.HDFS_CONNECTION, fs);
         properties.put(HDFSReader.HDFS_CONNECTION_POOL_MANAGER, poolManager);

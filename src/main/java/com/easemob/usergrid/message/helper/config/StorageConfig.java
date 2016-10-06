@@ -19,6 +19,7 @@ public class StorageConfig {
     private String storageMode;
     private static final String OSS_MODE = "oss";
     private static final String S3_MODE = "s3";
+
     @ConditionalOnMissingBean
     @ConfigurationProperties(prefix = "storage", ignoreInvalidFields = true)
     @Bean
@@ -26,21 +27,22 @@ public class StorageConfig {
         return new StorageProperties();
     }
 
-    @ConditionalOnMissingBean(name = "OSSStorage")
-    @Bean(name = "OSSStorage")
-    public CommonStorage getOSSStorage(StorageProperties storageProperties) {
+    @ConditionalOnMissingBean(name = "CommonStorage")
+    @Bean(name = "CommonStorage")
+    public CommonStorage getCommonStorage(StorageProperties storageProperties) {
         if (storageMode.equalsIgnoreCase(OSS_MODE)) {
-            return new OSSStorage(storageProperties.getOss());
+            return getOSSStorage(storageProperties);
+        } else if (storageMode.equalsIgnoreCase(S3_MODE)) {
+            return getS3Storage(storageProperties);
         }
         return null;
     }
 
-    @ConditionalOnMissingBean(name = "S3Storage")
-    @Bean(name = "S3Storage")
-    public CommonStorage getS3Storage(StorageProperties storageProperties) {
-        if (storageMode.equalsIgnoreCase(S3_MODE)) {
-            return new S3Storage(storageProperties.getS3());
-        }
-        return null;
+    private CommonStorage getOSSStorage(StorageProperties storageProperties) {
+        return new OSSStorage(storageProperties.getOss());
+    }
+
+    private CommonStorage getS3Storage(StorageProperties storageProperties) {
+        return new S3Storage(storageProperties.getS3());
     }
 }

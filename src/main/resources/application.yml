@@ -1,6 +1,11 @@
 service:
   config:
     storageMode: oss
+    readerMode: HDFS
+    thread:
+      readTaskThreadCount: 2
+      uploadTaskThreadCount: 30
+    checkTimestamp: true
 # HDFS conifg
 HDFS:
   baseUri: 'hdfs://10.26.68.156:8020'

@@ -8,6 +8,7 @@ import org.apache.commons.lang.StringUtils;
  */
 public class HDFSFileInstance extends FileInstance {
     private static final String SPLIT = "_";
+    private static final String EXTENTION_SPLIT = "\\.";
 
     public HDFSFileInstance(String path) {
         super(path);
@@ -47,8 +48,12 @@ public class HDFSFileInstance extends FileInstance {
         }
         String[] split = name.split(SPLIT);
         if (split.length >= 3) {
-            timestamp = Long.valueOf(split[2]);
-            return timestamp;
+            String temp = split[2];
+            String[] split1 = temp.split(EXTENTION_SPLIT);
+            if (split1.length >= 2) {
+                timestamp = Long.valueOf(split1[0]);
+                return timestamp;
+            }
         }
         return 0L;
     }
