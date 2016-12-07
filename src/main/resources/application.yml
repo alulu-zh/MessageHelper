@@ -26,7 +26,7 @@ redis:
     maxTotal: 100
 
 storage:
-  oss:
+  s3:
     credential:
       accessKeyId: 'N5EV6wm7IHaKmP41'
       accessKeySecret: '4NPOO3tPKEdoyqgiCV1PpFdxpAXfhr'

@@ -11,7 +11,6 @@
     <property name="FAILED_UPLOAD_FILE_LOG_NAME" value="failed_upload_file"/>
 
     <appender name="root_appender" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <Encoding>UTF-8</Encoding>
         <File>${ROOT_LOG_DIR}/${ROOT_LOG_NAME}.log</File>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <fileNamePattern>${ROOT_LOG_DIR}/${ROOT_LOG_NAME}.%d{yyyy-MM-dd-HH}.log.gz</fileNamePattern>
@@ -34,7 +33,6 @@
         </encoder>
     </appender>
     <appender name="error_appender" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <Encoding>UTF-8</Encoding>
         <File>${ROOT_ERROR_LOG_DIR}/${ROOT_ERROR_LOG_NAME}.log</File>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <fileNamePattern>${ROOT_ERROR_LOG_DIR}/${ROOT_ERROR_LOG_NAME}.%d{yyyy-MM-dd-HH}.log.gz</fileNamePattern>
@@ -49,7 +47,6 @@
         </encoder>
     </appender>
     <appender name="failed_list_files_appender" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <Encoding>UTF-8</Encoding>
         <File>${FAILED_LIST_FILES_LOG_DIR}/${FAILED_LIST_FILES_LOG_NAME}.log</File>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <fileNamePattern>${FAILED_LIST_FILES_LOG_DIR}/${FAILED_LIST_FILES_LOG_NAME}.%d{yyyy-MM-dd-HH}.log.gz</fileNamePattern>
@@ -67,7 +64,6 @@
         </encoder>
     </appender>
     <appender name="failed_read_file_appender" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <Encoding>UTF-8</Encoding>
         <File>${FAILED_READ_FILE_LOG_DIR}/${FAILED_READ_FILE_LOG_NAME}.log</File>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <fileNamePattern>${FAILED_READ_FILE_LOG_DIR}/${FAILED_READ_FILE_LOG_NAME}.%d{yyyy-MM-dd-HH}.log.gz</fileNamePattern>
@@ -85,7 +81,6 @@
         </encoder>
     </appender>
     <appender name="failed_upload_file_appender" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <Encoding>UTF-8</Encoding>
         <File>${FAILED_UPLOAD_FILE_LOG_DIR}/${FAILED_UPLOAD_FILE_LOG_NAME}.log</File>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <fileNamePattern>${FAILED_UPLOAD_FILE_LOG_DIR}/${FAILED_UPLOAD_FILE_LOG_NAME}.%d{yyyy-MM-dd-HH}.log.gz</fileNamePattern>
